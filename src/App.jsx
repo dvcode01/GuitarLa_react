@@ -5,10 +5,29 @@ import { db } from "../data/db";
 
 function App() {
   const [data, setData] = useState(db);
+  const [cart, setCart] = useState([]);
+
+  function addToCart(item){
+    const itemExists = cart.findIndex((guitar) => guitar.id === item.id);
+
+    // Existe un item duplicado
+    if(itemExists >= 0){
+      const updateCart = [...cart];
+      updateCart[itemExists].quantity++;
+
+      setCart(updateCart);
+    }else{
+      item.quantity = 1;
+      setCart([...cart, item]);
+    }
+
+  }
 
   return (
     <>
-    <Header />
+    <Header 
+
+    />
     
 
     <main className="container-xl mt-5">
@@ -19,6 +38,7 @@ function App() {
             <Guitar 
               key={guitar.id}
               guitar={guitar}
+              addToCart={addToCart}
             />
           ))}
         </div>
