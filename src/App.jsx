@@ -26,7 +26,7 @@ function App() {
   return (
     <>
     <Header 
-
+      cart={cart}
     />
     
 
