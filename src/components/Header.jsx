@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity}) {
+function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart}) {
     // State derivado
     const isEmpty = useMemo(() => cart.length === 0, [cart]);
 
@@ -82,7 +82,10 @@ function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity}) {
                                             </tbody>
                                         </table>
                                         <p className="text-end">Total pagar: <span className="fw-bold">${cartTotal}</span></p>
-                                        <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+                                        <button 
+                                            className="btn btn-dark w-100 mt-3 p-2"
+                                            onClick={clearCart}
+                                        >Vaciar Carrito</button>
                                     </>
                                 )}
 
