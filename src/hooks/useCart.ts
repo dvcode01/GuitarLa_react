@@ -3,7 +3,6 @@ import { db } from "../../data/db";
 import type { Guitar, CartItem } from "../types/types";
 
 export function useCart() {
-  const auth = true;
 
   const initialCart = () : CartItem[] => {
     const localStorageCart = localStorage.getItem('cart');
@@ -61,7 +60,7 @@ export function useCart() {
   }
 
   // Reduce la cantidad de elementos en el carrito
-  function decreaseQuantity(id){
+  function decreaseQuantity(id: Guitar['id']){
     const updatedCart = cart.map(item => {
       if(item.id === id && item.quantity > minItem){
         return{
