@@ -1,10 +1,11 @@
 import { useState, useEffect, useMemo } from "react";
 import { db } from "../../data/db";
+import type { Guitar, CartItem } from "../types/types";
 
 export function useCart() {
   const auth = true;
 
-  const initialCart = () => {
+  const initialCart = () : CartItem[] => {
     const localStorageCart = localStorage.getItem('cart');
 
     return localStorageCart ? JSON.parse(localStorageCart) : [];
@@ -22,7 +23,7 @@ export function useCart() {
   }, [cart])
 
   // Agrega elementos al carrito
-  function addToCart(item){
+  function addToCart(item: Guitar){
     const itemExists = cart.findIndex((guitar) => guitar.id === item.id);
 
     // Existe un item duplicado
@@ -33,18 +34,18 @@ export function useCart() {
 
       setCart(updateCart);
     }else{
-      item.quantity = 1;
-      setCart([...cart, item]);
+      const newItem : CartItem = {...item, quantity: 1}
+      setCart([...cart, newItem]);
     }
   }
 
   // Elimina los elementos del carrito
-  function removeFromCart(id){
+  function removeFromCart(id : Guitar['id']){
     setCart(prevCart => prevCart.filter(guitar => guitar.id !== id));
   }
 
   // Incrementa la cantidad de elementos en el carrito
-  function increaseQuantity(id){
+  function increaseQuantity(id : Guitar['id']){
     const updateCart = cart.map(item => {
       if(item.id === id && item.quantity < maxItem){
         return{
