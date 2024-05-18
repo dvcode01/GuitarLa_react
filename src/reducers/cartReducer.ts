@@ -19,12 +19,36 @@ export const initialState : CartState = {
     cart: []
 }
 
+const maxItem = 5;
+const minItem = 1;
+
 export const cartReducer = (state : CartState = initialState, action : CartActions) => {
     if(action.type === 'add-cart'){
+        let updatedCart: CartItem[] = [];
+
+        const itemExists = state.cart.find((guitar) => guitar.id === action.payload.item.id);
+
+        // Existe un item duplicado
+        if(itemExists){
+            updatedCart = state.cart.map(item => {
+                if(item.id === action.payload.item.id){
+                    if(item.quantity < maxItem){
+                        return {...item, quantity: item.quantity + 1}
+                    }else{
+                        return item;
+                    }
+                }else{
+                    return item;
+                }
+            })
+        }else{
+            const newItem : CartItem = {...action.payload.item, quantity: 1};
+            updatedCart = [...state.cart, newItem];
+        }
 
         return {
             ...state,
-
+            cart: updatedCart
         }
     }
 

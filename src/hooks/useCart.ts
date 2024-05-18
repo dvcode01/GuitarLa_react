@@ -19,22 +19,7 @@ export function useCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart])
 
-  // Agrega elementos al carrito
-  function addToCart(item: Guitar){
-    const itemExists = cart.findIndex((guitar) => guitar.id === item.id);
-
-    // Existe un item duplicado
-    if(itemExists >= 0){
-      if(cart[itemExists].quantity>= maxItem) return;
-      const updateCart = [...cart];
-      updateCart[itemExists].quantity++;
-
-      setCart(updateCart);
-    }else{
-      const newItem : CartItem = {...item, quantity: 1}
-      setCart([...cart, newItem]);
-    }
-  }
+  
 
   // Elimina los elementos del carrito
   function removeFromCart(id : Guitar['id']){
@@ -84,7 +69,6 @@ export function useCart() {
 
   return {
     cart,
-    addToCart,
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
