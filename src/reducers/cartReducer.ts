@@ -64,7 +64,7 @@ export const cartReducer = (state : CartState = initialState, action : CartActio
 
     if(action.type === 'increase-quantity'){
         // Incrementa la cantidad de elementos en el carrito
-        const updateCart = state.cart.map(item => {
+        const updatedCart = state.cart.map(item => {
             if(item.id === action.payload.id && item.quantity < maxItem){
                 return{
                     ...item, 
@@ -77,15 +77,25 @@ export const cartReducer = (state : CartState = initialState, action : CartActio
 
         return {
             ...state,
-            cart: updateCart
+            cart: updatedCart
         }
     }
 
     if(action.type === 'decrease-quantity'){
+        const updatedCart = state.cart.map(item => {
+            if(item.id === action.payload.id && item.quantity > minItem){
+              return{
+                ...item, 
+                quantity: item.quantity - 1
+              }
+            }
+      
+            return item;
+          });
 
         return {
             ...state,
-
+            cart: updatedCart
         }
     }
 

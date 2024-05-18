@@ -37,20 +37,20 @@ export function useCart() {
   // }
 
   // Reduce la cantidad de elementos en el carrito
-  function decreaseQuantity(id: Guitar['id']){
-    const updatedCart = cart.map(item => {
-      if(item.id === id && item.quantity > minItem){
-        return{
-          ...item, 
-          quantity: item.quantity - 1
-        }
-      }
+  // function decreaseQuantity(id: Guitar['id']){
+  //   const updatedCart = cart.map(item => {
+  //     if(item.id === id && item.quantity > minItem){
+  //       return{
+  //         ...item, 
+  //         quantity: item.quantity - 1
+  //       }
+  //     }
 
-      return item;
-    })
+  //     return item;
+  //   })
 
-    setCart(updatedCart);
-  }
+  //   setCart(updatedCart);
+  // }
 
   // Vacia por completo el carrito
   function clearCart(){
@@ -61,7 +61,6 @@ export function useCart() {
 
   return {
     cart,
-    decreaseQuantity,
     clearCart,
   }
 }
