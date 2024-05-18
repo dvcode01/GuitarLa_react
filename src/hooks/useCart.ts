@@ -21,20 +21,20 @@ export function useCart() {
 
 
   // Incrementa la cantidad de elementos en el carrito
-  function increaseQuantity(id : Guitar['id']){
-    const updateCart = cart.map(item => {
-      if(item.id === id && item.quantity < maxItem){
-        return{
-          ...item, 
-          quantity: item.quantity + 1
-        }
-      }
+  // function increaseQuantity(id : Guitar['id']){
+  //   const updateCart = cart.map(item => {
+  //     if(item.id === id && item.quantity < maxItem){
+  //       return{
+  //         ...item, 
+  //         quantity: item.quantity + 1
+  //       }
+  //     }
 
-      return item;
-    })
+  //     return item;
+  //   })
 
-    setCart(updateCart);
-  }
+  //   setCart(updateCart);
+  // }
 
   // Reduce la cantidad de elementos en el carrito
   function decreaseQuantity(id: Guitar['id']){
@@ -61,7 +61,6 @@ export function useCart() {
 
   return {
     cart,
-    increaseQuantity,
     decreaseQuantity,
     clearCart,
   }

@@ -5,12 +5,11 @@ import type { CartActions } from '../reducers/cartReducer';
 type HeaderProps = {
     cart: CartItem[]
     dispatch: Dispatch<CartActions>
-    increaseQuantity: (id: Guitar['id']) => void
     decreaseQuantity: (id: Guitar['id']) => void
     clearCart: () => void
 };
 
-function Header({cart, dispatch, increaseQuantity, decreaseQuantity, clearCart}: HeaderProps) {
+function Header({cart, dispatch, decreaseQuantity, clearCart}: HeaderProps) {
      // State derivado
     const isEmpty = useMemo(() => cart.length === 0, [cart]);
     const cartTotal = useMemo(() => cart.reduce((total, item) => total + (item.price * item.quantity), 0), [cart]);
@@ -72,7 +71,7 @@ function Header({cart, dispatch, increaseQuantity, decreaseQuantity, clearCart}:
                                                             <button
                                                                 type="button"
                                                                 className="btn btn-dark"
-                                                                onClick={() => increaseQuantity(guitar.id)}
+                                                                onClick={() => dispatch({type: 'increase-quantity', payload: {id: guitar.id}})}
                                                             >
                                                                 +
                                                             </button>
