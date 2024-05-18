@@ -104,7 +104,7 @@ export const cartReducer = (state : CartState = initialState, action : CartActio
 
         return {
             ...state,
-
+            cart: []
         }
     }
 
