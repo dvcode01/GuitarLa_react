@@ -19,12 +19,6 @@ export function useCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart])
 
-  
-
-  // Elimina los elementos del carrito
-  function removeFromCart(id : Guitar['id']){
-    setCart(prevCart => prevCart.filter(guitar => guitar.id !== id));
-  }
 
   // Incrementa la cantidad de elementos en el carrito
   function increaseQuantity(id : Guitar['id']){
@@ -67,7 +61,6 @@ export function useCart() {
 
   return {
     cart,
-    removeFromCart,
     increaseQuantity,
     decreaseQuantity,
     clearCart,
